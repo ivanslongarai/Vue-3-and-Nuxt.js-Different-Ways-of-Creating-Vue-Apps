@@ -1,7 +1,4 @@
 <template>
-<div>
-    <label for="Cadastro"></label>
-</div>
   <div
     class="
       d-flex
