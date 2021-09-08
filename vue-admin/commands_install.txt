@@ -1,0 +1,22 @@
+npm install -g @vue/cli
+npm i -g @vue/cli
+
+vue create vue-admin
+
+	Manually select features
+        Choose vue version
+	Babel
+	Typescript	
+	Router
+	Vuex
+	Linter / Formatter
+	3x
+	
+Use class-style component syntax? No
+Use babel alongside? Yes
+Use history mode for router? Yes
+ESLint with error prevention only (Lint on save) (In dedicated config files) (Enter to finish without saving the template)
+
+npm run server
+
+npm install axios
