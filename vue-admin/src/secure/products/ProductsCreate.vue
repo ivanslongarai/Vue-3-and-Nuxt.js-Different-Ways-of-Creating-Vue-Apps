@@ -19,6 +19,12 @@
     <div class="form-group">
       <label>Image</label>
       <input type="text" class="form-control" name="image" v-model="image" />
+      <div
+        class="input-group-append"
+        style="padding-top: 10px; padding-bottom: 10px"
+      >
+        <ImageUpload @file-uploaded="image = $event" />
+      </div>
     </div>
     <div class="form-group">
       <label>Price</label>
@@ -30,14 +36,15 @@
   </form>
 </template>
 
-<script>
+<script lang="ts">
 import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
+import ImageUpload from "@/secure/components/ImageUpload.vue";
 
 export default {
   name: "ProductsCreate",
-
+  components: { ImageUpload },
   setup() {
     const title = ref("");
     const description = ref("");
@@ -46,7 +53,7 @@ export default {
     const router = useRouter();
 
     const submit = async () => {
-      const response = await axios.post("products", {
+      await axios.post("products", {
         title: title.value,
         description: description.value,
         image: image.value,

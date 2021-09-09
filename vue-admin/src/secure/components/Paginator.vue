@@ -22,7 +22,7 @@ export default {
   props: {
     lastPage: Number,
   },
-  // eslint-disable-next-line
+
   setup(props, {emit}) {
 
     const page = ref(1);
