@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <h2>Section title</h2>
+  <h2>Users</h2>
   <div class="table-responsive">
     <table class="table table-striped table-sm">
       <thead>
@@ -38,7 +38,8 @@
           <td>{{ user.role.name }}</td>
           <td>
             <div class="btn-group mr-2">
-              <router-link :to="`/users/${user.id}/edit`"
+              <router-link
+                :to="`/users/${user.id}/edit`"
                 class="btn btn-sm btn-outline-secondary"
                 >Edit</router-link
               >
