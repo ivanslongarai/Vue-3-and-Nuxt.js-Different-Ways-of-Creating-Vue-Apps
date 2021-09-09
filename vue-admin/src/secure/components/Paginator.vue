@@ -1,0 +1,48 @@
+<template>
+  <nav>
+    <ul class="pagination">
+      <li>
+        <a class="page-link" href="javacript:void(0)" @click="previous"
+          >Previous</a
+        >
+      </li>
+      <li>
+        <a class="page-link" href="javacript:void(0)" @click="next">Next</a>
+      </li>
+    </ul>
+  </nav>
+</template>
+
+<script>
+import { ref } from "vue";
+
+export default {
+  name: "Paginator",
+  emits: ['page-changed'],
+  props: {
+    lastPage: Number,
+  },
+  // eslint-disable-next-line
+  setup(props, {emit}) {
+
+    const page = ref(1);
+
+    const next = async () => {
+      if (page.value === props.lastPage) return;
+      page.value++;
+      emit('page-changed', page.value);
+    };
+
+    const previous = async () => {
+      if (page.value === 1) return;
+      page.value--;
+      emit('page-changed', page.value);
+    };
+
+    return {
+      next,
+      previous,
+    };
+  },
+};
+</script>

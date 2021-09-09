@@ -73,7 +73,6 @@ import { useRouter } from 'vue-router';
 
 export default {
   name: "Register",
-
   setup() {
     const firstName = ref("");
     const lastName = ref("");

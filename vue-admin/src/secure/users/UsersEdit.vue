@@ -43,8 +43,8 @@
 <script lang="ts">
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import { useRouter, useRoute } from 'vue-router';
-import {User} from '@/classes/User';
+import { useRouter, useRoute } from "vue-router";
+import { User } from "@/classes/User";
 
 export default {
   name: "UsersEdit",
@@ -55,7 +55,7 @@ export default {
     const roleId = ref("");
     const roles = ref([]);
     const router = useRouter();
-    const {params} = useRoute();
+    const { params } = useRoute();
 
     onMounted(async () => {
       const response = await axios.get("roles");
@@ -63,13 +63,12 @@ export default {
 
       const userCall = await axios.get(`users/${params.id}`);
 
-      const user : User = userCall.data.data;
+      const user: User = userCall.data.data;
 
       firstName.value = user.first_name;
       lastName.value = user.last_name;
       email.value = user.email;
       roleId.value = user.role.id.toString();
-
     });
 
     const submit = async () => {
@@ -79,7 +78,7 @@ export default {
         email: email.value,
         role_id: roleId.value,
       });
-      await router.push('/users');
+      await router.push("/users");
     };
 
     return {

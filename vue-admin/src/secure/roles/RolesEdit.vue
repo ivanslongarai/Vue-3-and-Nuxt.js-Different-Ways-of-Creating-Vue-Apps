@@ -28,7 +28,7 @@
             type="checkbox"
             class="form-check-input"
             :value="permission.id"
-                      :checked="checked(permission.id)"
+            :checked="checked(permission.id)"
             @change="select(permission.id, $event.target.checked)"
           />
           <label class="form-check-label">{{ permission.name }}</label>

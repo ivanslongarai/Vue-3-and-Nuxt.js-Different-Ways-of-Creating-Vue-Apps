@@ -12,41 +12,42 @@
     "
   >
     <div class="btn-toolbar mb-2 mb-md-0">
-      <router-link to="/users/create" class="btn btn-sm btn-outline-secondary">
+      <router-link to="/products/create" class="btn btn-sm btn-outline-secondary">
         Add
       </router-link>
     </div>
   </div>
-
-  <h2>Users</h2>
+  <h2>Products</h2>
   <div class="table-responsive">
     <table class="table table-striped table-sm">
       <thead>
         <tr>
           <th>#</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Role</th>
+          <th>Image</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Price</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in users" :key="user.id">
-          <td>{{ user.id }}</td>
-          <td>{{ user.first_name }} {{ user.last_name }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.role.name }}</td>
+        <tr v-for="product in products" :key="product.id">
+          <td>{{ product.id }}</td>
+          <td><img :src="product.image" height="25" /></td>
+          <td>{{ product.title }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.price }}</td>
           <td>
             <div class="btn-group mr-2">
               <router-link
-                :to="`/users/${user.id}/edit`"
+                :to="`/products/${product.id}/edit`"
                 class="btn btn-sm btn-outline-secondary"
                 >Edit</router-link
               >
               <a
                 href="javascript:void(0)"
                 class="btn btn-sm btn-outline-secondary"
-                @click="del(user.id)"
+                @click="del(product.id)"
                 >Del</a
               >
             </div>
@@ -55,7 +56,6 @@
       </tbody>
     </table>
   </div>
-
   <Paginator :last-page="lastPage" @page-changed="load($event)" />
 </template>
 
@@ -66,15 +66,15 @@ import { Entity } from "@/interfaces/Entity";
 import Paginator from "@/secure/components/Paginator.vue";
 
 export default {
-  name: "Users",
+  name: "Products",
   components: { Paginator },
   setup() {
-    const users = ref([]);
+    const products = ref([]);
     const lastPage = ref(0);
 
     const load = async (page: number) => {
-      const response = await axios.get(`users?page=${page}`);
-      users.value = response.data.data;
+      const response = await axios.get(`products?page=${page}`);
+      products.value = response.data.data;
       lastPage.value = response.data.meta.last_page;
     };
 
@@ -82,16 +82,16 @@ export default {
 
     const del = async (id: number) => {
       if (confirm("Are you sure you want to delete this record?")) {
-        await axios.delete(`users/${id}`);
-        users.value = users.value.filter((e: Entity) => e.id !== id);
+        await axios.delete(`products/${id}`);
+        products.value = products.value.filter((e: Entity) => e.id !== id);
       }
     };
 
     return {
-      users,
+      products,
       lastPage,
       del,
-      load
+      load,
     };
   },
 };
