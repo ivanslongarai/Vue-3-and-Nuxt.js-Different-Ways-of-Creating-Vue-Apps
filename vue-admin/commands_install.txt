@@ -20,3 +20,5 @@ ESLint with error prevention only (Lint on save) (In dedicated config files) (En
 npm run server
 
 npm install axios
+
+npm install c3 @types/c3
