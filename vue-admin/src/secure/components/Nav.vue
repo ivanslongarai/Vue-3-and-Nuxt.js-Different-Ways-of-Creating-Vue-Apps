@@ -8,8 +8,8 @@
 
     <div class="navbar-nav">
       <router-link to="/profile" class="nav-link px-3 text-white"
-        >{{ user?.first_name }} {{ user?.last_name }}</router-link
-      >
+        >{{ user.name }}
+      </router-link>
 
       <a class="nav-link px-3" href="javascript:void(0)" @click="logout"
         >Sign out</a

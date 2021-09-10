@@ -1,24 +1,25 @@
 <template>
   <div>
-    <Nav/>
+    <Nav />
     <div class="container-fluid">
       <div class="row">
         <Menu />
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-          <router-view v-if="user" />
+          <router-view  v-if="user?.id"/>
         </main>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { onMounted, ref } from "vue";
 import Menu from "@/secure/components/Menu.vue";
 import Nav from "@/secure/components/Nav.vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { User } from "@/classes/User";
 
 export default {
   name: "Secure",
@@ -34,8 +35,21 @@ export default {
     onMounted(async () => {
       try {
         const response = await axios.get("user");
-        await store.dispatch("User/setUser", response.data.data);
-        user.value = response.data.data;
+
+        const userSecure = response.data.data;
+
+        await store.dispatch(
+          "User/setUser",
+          new User(
+            userSecure.id,
+            userSecure.first_name,
+            userSecure.last_name,
+            userSecure.email,
+            userSecure.role,
+            userSecure.permissions
+          )
+        );
+        user.value = userSecure;
       } catch (e) {
         await router.push("/login");
       }

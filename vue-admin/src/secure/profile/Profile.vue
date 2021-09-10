@@ -63,6 +63,7 @@
 import { ref, onMounted, computed } from "vue";
 import axios from "axios";
 import { useStore } from "vuex";
+import {User} from '@/classes/User';
 export default {
   name: "Profile",
   setup() {
@@ -87,7 +88,16 @@ export default {
         email: email.value,
       });
 
-      await store.dispatch('User/setUser', response.data);
+      const userSecure = response.data;
+
+      await store.dispatch('User/setUser', new User(
+            userSecure.id,
+            userSecure.first_name,
+            userSecure.last_name,
+            userSecure.email,
+            userSecure.role,
+            userSecure.permissions
+          ));
     };
 
     const submitPassword = async () => {
