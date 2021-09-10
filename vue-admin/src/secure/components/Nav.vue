@@ -19,17 +19,22 @@
 </template>
 
 <script>
+import { computed } from "@vue/reactivity";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 export default {
   name: "Nav",
-  props: ["user"],
   setup() {
     const router = useRouter();
+    const store = useStore();
+
+    const user = computed(() => store.state.user);
     const logout = () => {
       localStorage.clear();
       router.push("/login");
     };
     return {
+      user,
       logout,
     };
   },

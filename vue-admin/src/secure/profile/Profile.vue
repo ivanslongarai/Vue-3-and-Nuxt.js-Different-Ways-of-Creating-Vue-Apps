@@ -62,7 +62,6 @@
 <script lang="ts">
 import { ref, onMounted, computed } from "vue";
 import axios from "axios";
-import { User } from "@/classes/User";
 import { useStore } from "vuex";
 export default {
   name: "Profile",
@@ -82,11 +81,13 @@ export default {
     });
 
     const submitInfo = async () => {
-      await axios.put("users/info", {
+     const response = await axios.put("users/info", {
         first_name: firstName.value,
         last_name: lastName.value,
         email: email.value,
       });
+
+      await store.dispatch('setUser', response.data);
     };
 
     const submitPassword = async () => {
