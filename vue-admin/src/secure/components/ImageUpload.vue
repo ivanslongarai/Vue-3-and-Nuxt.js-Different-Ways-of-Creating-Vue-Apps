@@ -11,7 +11,7 @@ import axios from "axios";
 export default {
   name: "ImageUpload",
   emits: ["file-uploaded"],
-  setup(_, context) {
+  setup(_params : any, context : any) {
     const upload = async (files: FileList) => {
       const file = files.item(0);
 
