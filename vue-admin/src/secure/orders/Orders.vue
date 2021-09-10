@@ -12,7 +12,11 @@
     "
   >
     <div class="btn-toolbar mb-2 mb-md-0">
-      <a href="javascript:void(0)" class="btn btn-sm btn-outline-secondary">
+      <a
+        href="javascript:void(0)"
+        class="btn btn-sm btn-outline-secondary"
+        @click="exportFile"
+      >
         Export
       </a>
     </div>
@@ -62,7 +66,6 @@ export default {
   name: "Orders",
   components: { Paginator },
   setup() {
-
     const orders = ref([]);
     const lastPage = ref(0);
 
@@ -74,7 +77,21 @@ export default {
 
     onMounted(load);
 
-    return { load, lastPage, orders };
+    const exportFile = async () => {
+      const response = await axios.get("export", { responseType: "blob" });
+      const downloadUrl = window.URL.createObjectURL(response.data);
+      const link = document.createElement("a");
+      link.href = downloadUrl;
+      link.download = "orders.csv";
+      link.click();
+    };
+
+    return {
+      load,
+      lastPage,
+      orders,
+      exportFile,
+    };
   },
 };
 </script>
