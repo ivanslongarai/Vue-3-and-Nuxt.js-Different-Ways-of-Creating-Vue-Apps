@@ -11,7 +11,8 @@
       border-bottom
     "
   >
-    <div class="btn-toolbar mb-2 mb-md-0">
+    <div class="btn-toolbar mb-2 mb-md-0" v-if="authenticate.canEdit('users')"
+      >
       <router-link to="/roles/create" class="btn btn-sm btn-outline-secondary">
         Add
       </router-link>
@@ -32,7 +33,8 @@
           <td>{{ role.id }}</td>
           <td>{{ role.name }}</td>
           <td>
-            <div class="btn-group mr-2">
+            <div class="btn-group mr-2" v-if="authenticate.canEdit('users')"
+              >
               <router-link
                 :to="`/roles/${role.id}/edit`"
                 class="btn btn-sm btn-outline-secondary"
@@ -54,14 +56,18 @@
 
 
 <script lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import axios from "axios";
 import { Entity } from "@/interfaces/Entity";
+import { useStore } from "vuex";
 
 export default {
   name: "Roles",
   setup() {
     const roles = ref([]);
+
+    const store = useStore();
+    const authenticate = computed(() => store.state.User.user);
 
     onMounted(async () => {
       const response = await axios.get("roles");
@@ -76,7 +82,7 @@ export default {
       }
     };
 
-    return { roles, del };
+    return { roles, del, authenticate };
   },
 };
 </script>
