@@ -1,6 +1,8 @@
 <template>
+  <hr />
   <div>
-    <h5><label>Create a new Product record</label></h5>
+    <h4><label>Create a new Product record</label></h4>
+    <hr />
   </div>
   <form class="form-group" @submit.prevent="submit">
     <div class="form-group">

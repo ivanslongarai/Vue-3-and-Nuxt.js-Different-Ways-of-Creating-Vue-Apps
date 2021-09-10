@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h5><label>Create a new User record</label></h5>
+    <hr />
+    <h4><label>Create a new User record</label></h4>
+    <hr />
   </div>
   <form @submit.prevent="submit">
     <div class="form-group">

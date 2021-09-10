@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h5><label>Edit a existent Role record</label></h5>
+    <hr />
+    <h4><label>Edit a existent Role record</label></h4>
+    <hr />
   </div>
   <form @submit.prevent="submit">
     <div class="form-group row">
